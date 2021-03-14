@@ -14,7 +14,10 @@ const saveOrUpdate = async (filter, updateDoc) => {
 
 const getNodes = (query = {}) => {
     return new Promise((resolve, reject) => {
-        getCollection().find(query).toArray((err, result) => {
+        const options = {
+            projection: { _id: 0 },
+        };
+        getCollection().find(query, options).toArray((err, result) => {
             if (err) reject(err);
             resolve(result);
         })
