@@ -1,9 +1,4 @@
 const { MongoClient } = require("mongodb");
-const uri =
-    "mongodb+srv://admin:admin@cluster0.3lidy.mongodb.net/charts?retryWrites=true&w=majority";
-
-// Create a new MongoClient
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let _db;
 
@@ -12,6 +7,9 @@ module.exports = {
 
     connect: async () => {
         try {
+            // Create a new MongoClient
+            const client = new MongoClient(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+
             // Connect the client to the server
             await client.connect();
 
@@ -26,13 +24,6 @@ module.exports = {
             // Ensures that the client will close when you finish/error
             // await client.close();
         }
-    },
-
-    connectToServer: function (callback) {
-        MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
-            _db = client.db('charts');
-            return callback(err);
-        });
     },
 
     getDb: () => {

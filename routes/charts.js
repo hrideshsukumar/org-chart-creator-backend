@@ -4,9 +4,7 @@ const router = express.Router();
 const chartsController = require('../controllers/chartsController');
 
 /* GET charts listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', chartsController.charts_list);
 
 /* POST charts listing. */
 router.post('/', chartsController.charts_create_post);
