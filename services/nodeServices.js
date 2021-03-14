@@ -8,6 +8,13 @@ const bulkInsert = (nodes) => {
     return result;
 }
 
+const getNodes = async () => {
+    const result = await nodeRepo.getNodes();
+    console.log('getNodes result', result);
+    return result;
+}
+
 module.exports = {
-    bulkInsert
+    bulkInsert,
+    getNodes
 }
