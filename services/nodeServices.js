@@ -1,11 +1,15 @@
 const { format } = require('path');
 const nodeRepo = require('../repositories/nodeRepo');
 
-const bulkInsert = (nodes) => {
-    const result = nodes.map(node => {
-        return nodeRepo.saveOrUpdate({ id: node.id }, node);
-    })
-    return result;
+const bulkInsert = async (nodes) => {
+    try {
+        for (const node of nodes) {
+            await nodeRepo.saveOrUpdate({ id: node.id }, node);
+        }
+        return true;
+    } catch (e) {
+        throw e;
+    }
 }
 
 const getNodes = async () => {
