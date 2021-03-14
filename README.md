@@ -21,6 +21,14 @@ npm start
 
 For running frontend refer:
 [org-chart-creator](https://github.com/hrideshsukumar/org-chart-creator)
+
+## Environment Configuration
+
+To be added in .env file or deployed environment
+- **DB_URL**: MongoDB URL configuration for the corresponding environment
+- **ALLOWED_ORIGINS**: List of allowed origins to access APIs
+- **PORT**: Port on which server running. Default port is 3000
+
 ## Demo
 [Org chart creator](https://org-chart-creator.herokuapp.com/)
 
