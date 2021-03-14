@@ -4,8 +4,12 @@ const getCollection = () => {
     return mongoUtils.getDb().collection('nodes');
 };
 
-const saveOrUpdate = (search, updateInfo) => {
-    return getCollection().update(search, { $set: updateInfo }, { upsert: true })
+const saveOrUpdate = async (filter, updateDoc) => {
+    try {
+        return await getCollection().updateOne(filter, { $set: updateDoc }, { upsert: true })
+    } catch (e) {
+        throw e;
+    }
 }
 
 const getNodes = (query = {}) => {
