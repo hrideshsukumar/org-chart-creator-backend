@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 
 const indexRouter = require('./routes/index');
@@ -28,6 +29,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Connect to mongodb
 mongoUtils.connect().catch(console.dir);
+
+const ALLOWED_ORIGINS = process.env["ALLOWED_ORIGINS"].split(',');
+console.log(ALLOWED_ORIGINS);
+app.use(cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (ALLOWED_ORIGINS.indexOf(origin) === -1) {
+        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    }
+  }));
 
 
 app.use('/', indexRouter);
